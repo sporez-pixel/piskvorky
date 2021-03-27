@@ -1,0 +1,9 @@
+třídy
+1. hrací plocha
+2. hráči
+
+metody
+hp - kontrola, jestli jeden z nich nevyhrál
+   - zobrazovat kostičkovaný papír
+   - ukládat, co si každý z hráčů zahrál
+hr - po kliknutí se zobrazí X nebo O (nebo se daný čtvereček vybarví)
