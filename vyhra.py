@@ -29,13 +29,13 @@ def vyhra(list, x, y, hrac):
 def diagonala1(list, x, y, hrac):
     count = 0
     for i in range(1,5):
-        if (x+i < 14 and y+i < 14):
+        if (x+i <= 14 and y+i <= 14):
             if (hrac==list[y+i][x+i]):
                 count += 1
             else:
                 break
     for i in range(1,5):
-        if (x-i >= 0 and y-1 >= 0):
+        if (x-i >= 0 and y-i >= 0):
             if (hrac==list[y-i][x-i]):
                 count += 1
             else:
@@ -45,12 +45,27 @@ def diagonala1(list, x, y, hrac):
     return False    
 
 def diagonala2(list, x, y, hrac):
+    count = 0
+    for i in range(1,5):
+        if (x-i >= 0 and y+i <= 14):
+            if (hrac==list[y+i][x-i]):
+                count += 1
+            else:
+                break
+    for i in range(1,5):
+        if (x+i <= 14  and y-i >= 0):
+            if (hrac==list[y-i][x+i]):
+                count += 1
+            else:
+                break
+    if (count >= 4):
+        return True
     return False
 
 def radek(list, x, y, hrac):
     count = 0
     for i in range(1,5):
-        if (x+1 <= 14):
+        if (x+i <= 14):
             if (hrac==list[y][x+i]):
                 count += 1
             else:
@@ -66,5 +81,20 @@ def radek(list, x, y, hrac):
     return False
 
 def sloupec(list, x, y, hrac):
+    count = 0
+    for i in range(1,5):
+        if (y+i <= 14):
+            if (hrac==list[y+i][x]):
+                count += 1
+            else:
+                break
+    for i in range(1,5):
+        if (y-i >= 0):
+            if (hrac==list[y-i][x]):
+                count += 1
+            else:
+                break
+    if (count >= 4):
+        return True
     return False
         

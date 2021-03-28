@@ -27,16 +27,14 @@ class application:
         self.x = int((self.x - (self.x % 40)) / 40)
         self.y = int((self.y - (self.y % 40)) / 40)
         self.malujeme()
-        print(self.x, self.y)
-        self.printseznam()
+        self.vyhralnekdo()
 
     def malujeme(self):
         if (self.hraciplocha[self.y][self.x]==0):
             self.kdohraje()
         if (self.tahu >= 5):
             self.vyhral = vyhra(self.hraciplocha, self.x, self.y, self.narade)
-        if (self.vyhral):
-            print("VYHRA!")
+        
 
     def kdohraje(self):
         if (self.narade==1):
@@ -65,6 +63,15 @@ class application:
         y *= 40
         self.platno.create_oval(x+5,y+5,x+45,y+45)
 
-    def printseznam(self):
-        for s in self.hraciplocha:
-            print(s)
+    def vyhralnekdo(self):
+        if (self.vyhral):
+            if (self.narade==1):
+                self.hrac = 2
+            else:
+                self.hrac = 1
+            self.platno.create_text(304.5,203,text="GAME OVER",font=["Arial",50],fill="red")
+            self.okno.after(1000, self.textc)
+            self.okno.after(5000, self.okno.quit)
+
+    def textc(self):
+        self.platno.create_text(304.5, 304.5, text="Player "+str(self.hrac)+" won", font=["Arial",30], fill="black")
