@@ -1,10 +1,3 @@
-# class winchecker:
-#     # def __init__(self, list, x, y, hrac):
-#     #     self.list = list
-#     #     self.x = x
-#     #     self.y = y
-#     #     self.hrac = hrac
-
 def vyhra(list, x, y, hrac):
     if (hrac==1):
         hrac = 2
