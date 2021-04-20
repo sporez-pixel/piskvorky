@@ -2,8 +2,8 @@ def vyhra(list, x, y, hrac):
     """
     vysvětlím princip
     v podstatě kontroluji poslední místo, kam hráči zahráli, vždy o čtyři místa do všech různých světových stran = (S,J,V,Z,SV atd.)
-    pokud jsme zjistili, že v některých ze směrů, je čtyři a více stejných křížků nebo koleček (záleží na hráči), pak víme,
-    že hráč vyhrál
+    pokud jsme zjistili, že v některých ze směrů (vždy protilehlé světové strany, S a J nebo SZ a JV atd.), je čtyři a více stejných křížků nebo koleček (záleží na hráči), pak víme,
+    že daný hráč vyhrál
     """
     if (hrac==1):
         hrac = 2
@@ -67,22 +67,22 @@ def diagonala2(list, x, y, hrac): # stejný princip hledání, ale kouká se ze 
 
 def radek(list, x, y, hrac):
     count = 0 # počítadlo X nebo O záleží na hráči
-    for i in range(1,5): # for loop, který bude koukat na ose x doprava
+    for i in range(1,5): # for loop, který bude koukat na ose x (doprava)
         if (x+i <= 14): # tahle podmínka je zde, abychom se neocitli mimo hrací plochu
             if (hrac==list[y][x+i]): # kouká do mého seznamu, kde se ukládají data o hře
                 # hráč 1 má čislo 1 a hráč 2 číslo 2 a podle toho se mi ukládají i v seznamu
-                # pokud daný hráč bude mít vedle posledního zahraného místa (jeho posledního tahu) jiný X (nebo O)
+                # pokud daný hráč bude mít vedle posledního zahraného místa (jeho posledního tahu) svůj symbol
                 count += 1 # počítadlo započte, že se vedle nachází jeho symbol
             else:
-                break # kdyby vedle posledního zahraného místa nebyl jeho symbol, přeruší hledání loopu
-    for i in range(1,5): # to samé, jako nahoře, ale pro druhý směr 
-        # nahoře koukal doprava, zde kouká doleva
+                break # kdyby vedle posledního zahraného místa nebyl jeho symbol, přeruší se hledání
+
+    for i in range(1,5): # to samé, jako nahoře, ale pro druhý směr (doleva)
         if (x-i >= 0):
             if (hrac==list[y][x-i]):
                 count += 1
             else:
                 break
-    if (count >= 4): # pokud našel více jak (nebo přesně) 4 symboly vedle sebe víme, že vyhrál
+    if (count >= 4): # pokud našel více jak (nebo přesně) 4 symboly vedle sebe víme, že vyhrálS
         return True
     return False
 
@@ -90,7 +90,7 @@ def sloupec(list, x, y, hrac): # zde se opakuje přesně to samé, ale pro sloup
     count = 0 
     for i in range(1,5):
         if (y+i <= 14):
-            if (hrac==list[y+i][x]):
+            if (hrac==list[y+i][x]): # kouká na osu y
                 count += 1
             else:
                 break
