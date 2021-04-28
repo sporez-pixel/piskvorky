@@ -11,6 +11,7 @@ class application:
         self.narade = 1 # proměná, která sleduje, která sleduje kdo je na tahu
         self.tahu = 0 # proměná, která sleduje kolik tahů se hrálo
         self.vyhral = False # boolean proměná, která sleduje, jestli někdo nevyhrál
+        self.computer = computer()
         self.hrajeme() # veškerá logika hry se odehrává v této funkci
 
     def vytvorpapir(self): # vytváří 2D list, ve kterém se ukládají data
@@ -51,6 +52,7 @@ class application:
     def hrajeme(self):
         # tady jen pozorujeme klik hráčů
         self.okno.bind("<Button 1>",self.klik)
+        self.computerMove()
         self.platno.after(50,self.hrajeme) # po 50 milisekundách se zpouští hlavní funkce, kde probíhá celá hra
 
     def malujkrizek(self,x,y): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby namaloval křížek
@@ -77,3 +79,8 @@ class application:
 
     def textc(self): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby napsal text
         self.platno.create_text(304.5, 304.5, text="Player "+str(self.hrac)+" won", font=["Arial",30], fill="black")
+
+    def computerMove(self):
+        # self.x, self.y = 
+        self.kdohraje()
+        pass
