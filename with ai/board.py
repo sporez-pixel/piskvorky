@@ -1,5 +1,6 @@
 # GUI of my app
 from tkinter import *
+from ai import *
 from vyhra import *
 
 class application:
@@ -38,21 +39,23 @@ class application:
 
     def kdohraje(self): # zde se jen program kouká kdo hraje, totiž co má malova a kam
         # když je na řade hráč 1 self.narade = 1
-        # když je na řadě hráč 2 self.narade = 2
-        if (self.narade==1):
+        # když je na řadě pocitac self.narade = 2
+        if self.narade == 1:
             self.narade = 2
             self.malujkrizek(self.x,self.y)
             self.hraciplocha[self.y][self.x] = 1
-
         else:
-            self.narade = 1
             self.malujkolecko(self.x,self.y)
             self.hraciplocha[self.y][self.x] = 2
+            self.narade = 1
+            
 
     def hrajeme(self):
         # tady jen pozorujeme klik hráčů
         self.okno.bind("<Button 1>",self.klik)
-        self.computerMove()
+        if(self.narade == 2):
+            self.computerMove()
+            self.malujeme()
         self.platno.after(50,self.hrajeme) # po 50 milisekundách se zpouští hlavní funkce, kde probíhá celá hra
 
     def malujkrizek(self,x,y): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby namaloval křížek
@@ -78,10 +81,12 @@ class application:
             self.okno.after(5000, self.okno.quit)
 
     def textc(self): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby napsal text
-        self.platno.create_text(304.5, 304.5, text="Player "+str(self.hrac)+" won", font=["Arial",30], fill="black")
+        if self.narade == 1:
+            self.platno.create_text(304.5, 304.5, text="Player won", font=["Arial",30], fill="black")
+        else:
+            self.platno.create_text(304.5, 304.5, text="Computer won", font=["Arial",30], fill="black")
 
     def computerMove(self): # a function that interacts with the class computer
         self.computer.getBoard(self.hraciplocha)
-        # self.x, self.y = 
+        self.x, self.y = self.computer.computerMove()
         self.kdohraje()
-        pass
