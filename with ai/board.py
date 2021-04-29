@@ -80,7 +80,8 @@ class application:
     def textc(self): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby napsal text
         self.platno.create_text(304.5, 304.5, text="Player "+str(self.hrac)+" won", font=["Arial",30], fill="black")
 
-    def computerMove(self):
+    def computerMove(self): # a function that interacts with the class computer
+        self.computer.getBoard(self.hraciplocha)
         # self.x, self.y = 
         self.kdohraje()
         pass
