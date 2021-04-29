@@ -88,5 +88,5 @@ class application:
 
     def computerMove(self): # a function that interacts with the class computer
         self.computer.getBoard(self.hraciplocha)
-        self.x, self.y = self.computer.computerMove()
+        self.x, self.y = self.computer.computerMove([self.x,self.y])
         self.kdohraje()
