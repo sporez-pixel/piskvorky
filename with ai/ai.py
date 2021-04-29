@@ -8,10 +8,10 @@ class computer:
     
     def minimax(self, depth, isMaximazing, lastMoves):
 
-        someonewon = vyhra(self.board, lastMoves[0], lastMoves[1], switch(isMaximazing))
+        someonewon = vyhra(self.board, lastMoves[0], lastMoves[1], self.switch(isMaximazing))
         if someonewon and isMaximazing:
             return 1
-        elif someonewon:
+        if someonewon:
             return -1
 
         if depth<0:
@@ -43,11 +43,22 @@ class computer:
         self.board = board
 
     def computerMove(self):
-        possible = False
-        while(possible == False):
-            x,y = self.randomMove()
-            possible = self.possible(x,y)
-        return x,y
+        # possible = False
+        # while(possible == False):
+        #     x,y = self.randomMove()
+        #     possible = self.possible(x,y)
+        bestScore = -100
+        for y in range(15):
+                for x in range(15):
+                    if self.possible(x,y):
+                        self.board[y][x] = 2
+                        score = self.minimax(0, True, [x,y])
+                        self.board[y][x] = 0
+                        if score>bestScore:
+                            bestScore = score
+                            rx = x
+                            ry = y
+        return rx,ry
 
     def searchMoves(self):
         pass
