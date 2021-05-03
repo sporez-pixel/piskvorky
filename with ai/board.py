@@ -13,6 +13,7 @@ class application:
         self.tahu = 0 # proměná, která sleduje kolik tahů se hrálo
         self.vyhral = False # boolean proměná, která sleduje, jestli někdo nevyhrál
         self.computer = computer()
+        self.kdoVyhral = 0
         self.hrajeme() # veškerá logika hry se odehrává v této funkci
 
     def vytvorpapir(self): # vytváří 2D list, ve kterém se ukládají data
@@ -35,6 +36,8 @@ class application:
         if (self.hraciplocha[self.y][self.x]==0): # maluj pokud na místo, kde hráč kliknul, pokud tam už někdo předtím nemaloval
             self.kdohraje() # v této funkci ještě kontroluji kdo hraje, tudíž co se maluje O nebo X
             self.vyhral = vyhra(self.hraciplocha, self.x, self.y, self.narade) # funkce, která se kouká, jestli někdo nevyhrál
+            if self.vyhral:
+                self.kdoVyhral = self.narade
         
 
     def kdohraje(self): # zde se jen program kouká kdo hraje, totiž co má malova a kam
@@ -81,7 +84,7 @@ class application:
             self.okno.after(5000, self.okno.quit)
 
     def textc(self): # abych to měl jednoduší, tady mám definované, co má tkinter dělat, aby napsal text
-        if self.narade == 1:
+        if self.kdoVyhral == 2:
             self.platno.create_text(304.5, 304.5, text="Player won", font=["Arial",30], fill="black")
         else:
             self.platno.create_text(304.5, 304.5, text="Computer won", font=["Arial",30], fill="black")
@@ -89,4 +92,5 @@ class application:
     def computerMove(self): # a function that interacts with the class computer
         self.computer.getBoard(self.hraciplocha)
         self.x, self.y = self.computer.computerMove([self.x,self.y])
-        self.kdohraje()
+        self.malujeme()
+        self.vyhralnekdo()
